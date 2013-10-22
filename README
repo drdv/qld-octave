@@ -1,0 +1,14 @@
+This is a MATLAB / Octave interface for QLD solver.
+
+QLD is a QP solver (http://www.ai7.uni-bayreuth.de/ql_rep.htm) written by
+Klaus Schittkowski. The solver is free for academic purposes. In order to
+obtain it contact the author.
+
+Installation:
+    1) Copy 'qld.f' in this directory.
+    2) Run 'make octave' or 'make matlab'. 
+    3) Copy 'qld.m' and 'qld_interface.mex' into a directory, which
+    is added to the search path of Octave / MATLAB.
+
+Documentation:
+    Execute 'help qld' in Octave / Matlab after installation.
