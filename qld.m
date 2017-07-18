@@ -23,13 +23,13 @@
 %   Variables x0, g, A, b, lb, ub, Ain, bin can be empty matrices.
 %
 %   options -- a structure containing solver options:
-%       1) 'hessian_mode': 1 -- normal Hessian, 0 -- H is upper 
+%       1) 'hessian_mode': 1 -- normal Hessian, 0 -- H is upper
 %       triangular factor of Cholesky decomposition of the Hessian.
 %
 %       2) 'tolerance' -- tolerance.
 %
 %
-% Output: 
+% Output:
 %
 %   x -- the solution
 %
@@ -44,7 +44,7 @@
 %           4 -- insufficient memory
 %           5 -- inconsistent constraints
 %           6 -- unknown error
-%       inconsistent_constraint_index -- index of the inconsistent 
+%       inconsistent_constraint_index -- index of the inconsistent
 %           constraint if the exit status is equal to 5.
 %
 %   lambda -- Lagrange multipliers in the following order
@@ -60,7 +60,7 @@ function [x, obj, info, lambda] = qld(varargin)
     H = [];
     g = [];
     A = [];
-    b = []; 
+    b = [];
     lb = [];
     ub = [];
     Ain = [];
@@ -93,7 +93,7 @@ function [x, obj, info, lambda] = qld(varargin)
                 g = varargin{3};
                 A = varargin{4};
                 b = varargin{5};
-        
+
                 if (6 == nargin)
                     options = varargin{6};
                 else
@@ -139,7 +139,7 @@ function [x, obj, info, lambda] = qld(varargin)
         error('Hessian is not initialized.');
     end
 
-    if (~issquare(H))
+    if (size(H,1) ~= size(H,2))
         error('Hessian is not square.');
     end
 
@@ -159,7 +159,7 @@ function [x, obj, info, lambda] = qld(varargin)
     if (isempty(lb))
         lb = -QLD_INF * ones(num_var, 1);
     else
-        if ((size(lb, 1) != num_var) || (size(lb, 2) != 1))
+        if ((size(lb, 1) ~= num_var) || (size(lb, 2) ~= 1))
             error('Incorrect size of the vector of lower bounds.');
         end
     end
@@ -167,16 +167,16 @@ function [x, obj, info, lambda] = qld(varargin)
     if (isempty(ub))
         ub =  QLD_INF * ones(num_var, 1);
     else
-        if ((size(ub, 1) != num_var) || (size(ub, 2) != 1))
+        if ((size(ub, 1) ~= num_var) || (size(ub, 2) ~= 1))
             error('Incorrect size of the vector of upper bounds.');
         end
     end
-    
+
 
     % initial guess
     if (isempty(x0))
         x0 = zeros(num_var, 1);
-    else 
+    else
         if ((size(x0, 1) ~= num_var) && (size(x0, 2) ~= 1))
             error('Incorrect size of the initial guess.');
         end
