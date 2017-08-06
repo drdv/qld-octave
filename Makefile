@@ -1,3 +1,5 @@
+all: matlab install
+
 matlab: get_qld
 	matlab -nosplash -nodesktop -nojvm -r 'make_matlab; quit' | tail +10
 
